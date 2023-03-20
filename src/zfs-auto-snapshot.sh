@@ -594,7 +594,7 @@ SNAPPROP="-o com.sun:auto-snapshot-desc='$opt_event'"
 # ISO style date; fifteen characters: YYYY-MM-DD-HHMM
 # On Solaris %H%M expands to 12h34.
 # We use the shortfirm -u here because --utc is not supported on macos.
-DATE=$(date -u +%F-%H%M)
+DATE=$(date +%F-%H%M)
 
 # The snapshot name after the @ symbol.
 SNAPNAME="${opt_prefix:+$opt_prefix$opt_sep}${opt_label:+$opt_label}-$DATE"
