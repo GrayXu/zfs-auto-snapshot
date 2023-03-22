@@ -1,10 +1,10 @@
 # zfs-auto-snapshot
 
 What has changed in this fork?
-- By default, recursive snapshotting is not enabled. (Use TARGETS_REGULAR if the recursive flag is not set)
-- Instead of UTC, use localtime.
-- Subsequent snapshots will not be aborted even if the pre-snapshot command fails once.
-- By default, use `zfs_auto_snapshot_target` located in `/etc/profile` as the target. If this is not specified, then take snapshots of all datasets. with `//`.
+- By default, recursive snapshotting is not enabled. (Use TARGETS_REGULAR if the recursive flag is not set). [bce1d7e](https://github.com/GrayXu/zfs-auto-snapshot/commit/bce1d7ef335a894f1f19e7ed5fcc7da43c722d25)
+- Instead of UTC, use localtime. [cdaa3e8](https://github.com/GrayXu/zfs-auto-snapshot/commit/cdaa3e856091bf5124f47fc842926a97c44280cd)
+- Subsequent snapshots will not be aborted even if the pre-snapshot command fails once. [7f407d8](https://github.com/GrayXu/zfs-auto-snapshot/commit/7f407d8154362a6ce3cd2c5452697327021f43ae)
+- By default, use `zfs_auto_snapshot_target` located in `/etc/profile` as the target. If this is not specified, then take snapshots of all datasets. with `//` (*e.g. `export zfs_auto_snapshot_target='tank1'`*). [6310992](https://github.com/GrayXu/zfs-auto-snapshot/commit/6310992dcda57ce966ecb81c3e1e0d6ff5b91d28)
 
 ---
 
