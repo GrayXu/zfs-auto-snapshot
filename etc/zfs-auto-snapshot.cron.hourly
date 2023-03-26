@@ -2,5 +2,4 @@
 
 # Only call zfs-auto-snapshot if it's available
 which zfs-auto-snapshot > /dev/null || exit 0
-. /etc/profile
-zfs-auto-snapshot --quiet --syslog --label=hourly --keep=24 ${zfs_auto_snapshot_target:-//}
+zfs-auto-snapshot --default-exclude --quiet --syslog --label=hourly --keep=24 //
