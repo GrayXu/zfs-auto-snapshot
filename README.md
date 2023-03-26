@@ -5,8 +5,9 @@ What has changed in this fork?
 - Instead of UTC, use localtime.
 - Subsequent snapshots will not be aborted even if the pre-snapshot command fails once.
 - ~~By default, use `zfs_auto_snapshot_target` located in `/etc/profile` as the target. If this is not specified, then take snapshots of all datasets. with `//` (*e.g. `export zfs_auto_snapshot_target='tank1'`*).~~
-  - It turns out setting `com.sun:auto-snapshot=true/false` with `zfs-auto-snapshot --default-exclude` is enough. (btw, I change default cron scripts to use `--default-exclude`)
-
+  - It turns out setting `com.sun:auto-snapshot=true/false` with `zfs-auto-snapshot --default-exclude` is enough.
+- Detect bytes_written firstly to prevent duplicate snapshot (and potential disk spin-ups)
+- Add `-c` and `--default-exclude` options to default cron scripts
 ---
 
 An alternative implementation of the zfs-auto-snapshot service for Linux
