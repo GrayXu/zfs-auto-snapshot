@@ -1,13 +1,39 @@
 # zfs-auto-snapshot
 
-What has changed in this fork?
-- By default, recursive snapshotting is not enabled. (Use TARGETS_REGULAR if the recursive flag is not set).
-- Instead of UTC, use localtime.
+Currently, [zfsonlinux/zfs-auto-snapshot](https://github.com/zfsonlinux/zfs-auto-snapshot) is no longer being actively developed. However, it remains a powerful and straightforward shell script tool. Therefore, this fork incorporates several features from other branches.
+
+What has changed in this fork:
+- Disable default recursive snapshot strategy. 
+- Use localtime by default instead of UTC.
 - Subsequent snapshots will not be aborted even if the pre-snapshot command fails once.
-- ~~By default, use `zfs_auto_snapshot_target` located in `/etc/profile` as the target. If this is not specified, then take snapshots of all datasets. with `//` (*e.g. `export zfs_auto_snapshot_target='tank1'`*).~~
-  - It turns out setting `com.sun:auto-snapshot=true/false` with `zfs-auto-snapshot --default-exclude` is enough.
-- Detect bytes_written firstly to prevent duplicate snapshot (and potential disk spin-ups)
-- Add `-c` and `--default-exclude` options to default cron scripts
+- Add `-c` option to detect bytes_written firstly in order to prevent duplicate snapshot and potential disk wake-ups.
+- Add `--default-exclude` options to default cron scripts. So only datasets with `com.sun:auto-snapshot=true` will be snapshotted.
+
+```
+$ zfs-auto-snapshot -h                                                                
+Usage: /usr/local/sbin/zfs-auto-snapshot [options] [-l label] <'//' | name [name...]>
+  --default-exclude  Exclude datasets if com.sun:auto-snapshot is unset.
+  -c, --changed      Snap only if data written > 0.
+  -d, --debug        Print debugging messages.
+  -e, --event=EVENT  Set the com.sun:auto-snapshot-desc property to EVENT.
+      --fast         Use a faster zfs list invocation.
+  -n, --dry-run      Print actions without actually doing anything.
+  -s, --skip-scrub   Do not snapshot filesystems in scrubbing pools.
+  -h, --help         Print this usage message.
+  -k, --keep=NUM     Keep NUM recent snapshots and destroy older snapshots.
+  -l, --label=LAB    LAB is usually 'hourly', 'daily', or 'monthly'.
+  -p, --prefix=PRE   PRE is 'zfs-auto-snap' by default.
+  -q, --quiet        Suppress warnings and notices at the console.
+      --send-full=F  Send zfs full backup. Unimplemented.
+      --send-incr=F  Send zfs incremental backup. Unimplemented.
+      --sep=CHAR     Use CHAR to separate date stamps in snapshot names.
+  -g, --syslog       Write messages into the system log.
+  -r, --recursive    Snapshot named filesystem and all descendants.
+  -v, --verbose      Print info messages.
+      --destroy-only Only destroy older snapshots, do not create new ones.
+      name           Filesystem and volume names, or '//' for all ZFS datasets.
+```
+
 ---
 
 An alternative implementation of the zfs-auto-snapshot service for Linux
@@ -25,13 +51,9 @@ the zfs utilities and cron, and can run in the dash shell.
 Installation:
 -------------
 
-~~wget https://github.com/zfsonlinux/zfs-auto-snapshot/archive/upstream/1.2.4.tar.gz  
-tar -xzf 1.2.4.tar.gz  
-cd zfs-auto-snapshot-upstream-1.2.4  
-make install~~
-
 ```
 git clone git@github.com:GrayXu/zfs-auto-snapshot.git
 cd zfs-auto-snapshot
 make install
+zfs set com.sun:auto-snapshot=true tank
 ```

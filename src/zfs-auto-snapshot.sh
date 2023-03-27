@@ -253,6 +253,7 @@ GETOPT=$($GETOPT_BIN \
   --longoptions=debug,help,quiet,syslog,verbose \
   --longoptions=pre-snapshot:,post-snapshot:,destroy-only \
   --longoptions=min-size: \
+  --longoptions=changed: \
   --options=dnshe:l:k:p:rs:qgcvm: \
   -- "$@" ) \
   || exit 128
