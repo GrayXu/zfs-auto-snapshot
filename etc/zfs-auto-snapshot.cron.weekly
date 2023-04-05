@@ -2,4 +2,4 @@
 
 # Only call zfs-auto-snapshot if it's available
 which zfs-auto-snapshot > /dev/null || exit 0
-zfs-auto-snapshot --default-exclude --quiet --syslog --label=weekly --keep=8 //
+zfs-auto-snapshot -c --default-exclude --quiet --syslog --keep=8 //

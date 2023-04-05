@@ -1,5 +1,7 @@
 # zfs-auto-snapshot
 
+this branch is for my usage. I use `--changed` option as default to keep my disks sleeping, and disable default labels.
+
 Currently, [zfsonlinux/zfs-auto-snapshot](https://github.com/zfsonlinux/zfs-auto-snapshot) is no longer being actively developed. However, it remains a powerful and straightforward shell script tool. Therefore, this fork incorporates several features from other branches.
 
 What has changed in this fork:
