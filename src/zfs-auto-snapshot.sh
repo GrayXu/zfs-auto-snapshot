@@ -173,7 +173,7 @@ do_snapshots () # properties, flags, snapname, oldglob, [targets...]
 				if [ "$kb_written" -lt "$opt_min_size" ]
 				then
 						size_check_skip=1
-						if [ $opt_verbose -gt 0 ]
+						if [ -n "$opt_verbose" ]
 						then
 								echo "Skipping target $ii, only $kb_written kB written since last snap. opt_min_size is $opt_min_size"
 						fi
@@ -186,7 +186,7 @@ do_snapshots () # properties, flags, snapname, oldglob, [targets...]
 			if [ "$bytes_written" -eq 0 ]
 			then
 					size_check_skip=1
-					if [ $opt_verbose -gt 0 ]
+					if [ -n "$opt_verbose" ]
 					then
 							echo "Skipping target $ii, 0 bytes written since last snap."
 					fi
