@@ -20,8 +20,9 @@
 #
 
 # Set the field separator to a literal tab and newline.
-IFS="	
-"
+IFS="
+	"
+
 
 # Set default program options.
 opt_backup_full=''
@@ -429,7 +430,7 @@ then
 	if [ -n "$opt_label" ]
 	then
 		SNAPSHOTS_OLD=$(env LC_ALL=C zfs list -H -t snapshot -o name -s name | \
-			grep "$opt_prefix"_"$opt_label" | \
+			grep "${opt_prefix}${opt_sep}${opt_label}" | \
 			awk '{ print substr( $0, length($0) - 14, length($0) ) " " $0}' | \
 			sort -r -k1,1 -k2,2 | \
 			awk '{ print substr( $0, 17, length($0) )}') \
